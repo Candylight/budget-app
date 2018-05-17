@@ -1,17 +1,25 @@
 <template>
     <b-row>
         <b-col cols="12">
-            <h2>
+            <h2 style="text-align: center">
                 Goal List
-                <b-link href="#/add-goal">(Add Goal)</b-link>
             </h2>
-            <div>
-                <info-card v-for="goal of goals"
-                               :frontTitle= "goal.name"
-                               :frontData="goal.description"
-                               :backTitle="goal.name"
-                               :backData="goal.description"/>
-            </div>
+            <b-card-group columns>
+                <b-card v-for="goal of goals"
+                        :title="goal.name"
+                        class="text-center">
+                    <p class="card-text">
+                        {{goal.description}}
+                    </p>
+                    <b-btn size="sm" variant="primary" @click.stop="details(goal)">Details</b-btn>
+                </b-card>
+                <b-button href="#/add-goal"
+                          size="lg"
+                          variant="success"
+                >
+                    New Goal
+                </b-button>
+            </b-card-group>
             <ul v-if="errors && errors.length">
                 <li v-for="error of errors">
                     {{error.message}}
