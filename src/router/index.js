@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import GoalList from '@/components/GoalList';
-import ShowGoal from '@/components/ShowGoal';
-import CreateGoal from '@/components/CreateGoal';
-import EditGoal from '@/components/EditGoal';
+import GoalList from '@/components/goal/GoalList';
+import ShowGoal from '@/components/goal/ShowGoal';
+import CreateGoal from '@/components/goal/CreateGoal';
+import EditGoal from '@/components/goal/EditGoal';
 
 Vue.use(Router);
 
