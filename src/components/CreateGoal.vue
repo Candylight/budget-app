@@ -3,7 +3,7 @@
         <b-col cols="12">
             <h2>
                 Add Goal
-                <b-link href="#/">(Goal List)</b-link>
+                <b-link href="#/list-goal">(Goal List)</b-link>
             </h2>
             <b-form @submit="onSubmit">
                 <b-form-group id="fieldsetHorizontal"

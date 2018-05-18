@@ -8,8 +8,19 @@
                 <b-card v-for="goal of goals"
                         :title="goal.name"
                         class="text-center">
-                    <p class="card-text">
+                    <p class="card-text" v-if="goal.percent_done === 100">
+                        Done !
+                        <b-progress :value="goal.percent_done"
+                                    variant="success"
+                                    max=100 show-progress>
+                        </b-progress>
+                    </p>
+                    <p class="card-text" v-else>
                         {{goal.description}}
+                        <b-progress :value="goal.percent_done"
+                                    variant="primary"
+                                    max=100 show-progress>
+                        </b-progress>
                     </p>
                     <b-btn size="sm" variant="primary" @click.stop="details(goal)">Details</b-btn>
                 </b-card>
