@@ -5,6 +5,7 @@ let logger = require('morgan');
 let bodyParser = require('body-parser');
 let goal = require('./routes/goal');
 let category = require('./routes/category');
+let expense = require('./routes/expense');
 let cors = require('cors')
 let app = express();
 app.use(cors());
@@ -107,7 +108,8 @@ app.use('/goals', express.static(path.join(__dirname, 'dist')));
 app.use('/goal', goal);
 app.use('/categories', express.static(path.join(__dirname, 'dist')));
 app.use('/category', category);
-
+app.use('/expenses', express.static(path.join(__dirname, 'dist')));
+app.use('/expense', expense);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   let err = new Error('Not Found');
