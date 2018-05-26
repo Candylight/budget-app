@@ -13,6 +13,7 @@
                     Name: {{goal.name}}<br>
                     Description: {{goal.description}}<br>
                     Cost: {{goal.cost}}<br>
+                    Category: {{category.name}}<br>
                     Limit Date: {{goal.limit_date}}<br>
                 </template>
                 <hr class="my-4">
@@ -32,12 +33,20 @@ export default {
   data() {
     return {
       goal: [],
+      category: '',
     };
   },
   created() {
     axios.get(`http://localhost:3000/goal/${this.$route.params.id}`)
       .then((response) => {
         this.goal = response.data;
+        axios.get(`http://localhost:3000/category/${this.goal.category}`)
+          .then((res) => {
+            this.category = res.data;
+          })
+          .catch((e) => {
+            this.errors.push(e);
+          });
       })
       .catch((e) => {
         this.errors.push(e);

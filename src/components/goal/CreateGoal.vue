@@ -11,7 +11,7 @@
                               :label-cols="4"
                               breakpoint="md"
                               label="Enter Name">
-                    <b-form-input id="name" :state="state" v-model.trim="goal.name"></b-form-input>
+                    <b-form-input id="name" v-model.trim="goal.name"></b-form-input>
                 </b-form-group>
                 <b-form-group id="fieldsetHorizontal"
                               horizontal
@@ -29,15 +29,26 @@
                               :label-cols="4"
                               breakpoint="md"
                               label="Enter Cost">
-                    <b-form-input id="cost" :state="state" v-model.number="goal.cost">
+                    <b-form-input id="cost" v-model.number="goal.cost">
                     </b-form-input>
                 </b-form-group>
                 <b-form-group id="fieldsetHorizontal"
                               horizontal
                               :label-cols="4"
                               breakpoint="md"
+                              label="Enter Category">
+                    <b-form-select id="category" v-model="goal.category">
+                        <option v-for="category in categories"
+                                value="category._id">{{category.name}}
+                        </option>
+                    </b-form-select>
+                </b-form-group>
+                <b-form-group id="fieldsetHorizontal"
+                              horizontal
+                              :label-cols="4"
+                              breakpoint="md"
                               label="Enter Limit Date">
-                    <datepicker  id="limit_date" :state="state" v-model.trim="goal.limit_date">
+                    <datepicker  id="limit_date" v-model.trim="goal.limit_date">
                     </datepicker>
                 </b-form-group>
                 <b-button type="submit" variant="primary">Save</b-button>
@@ -56,10 +67,21 @@ export default {
   data() {
     return {
       goal: {},
+      categories: [],
     };
   },
   components: {
     Datepicker,
+  },
+  created() {
+    axios.get('http://localhost:3000/category')
+      .then((response) => {
+        this.categories = response.data;
+      },
+      )
+      .catch((e) => {
+        this.errors.push(e);
+      });
   },
   methods: {
     onSubmit(evt) {

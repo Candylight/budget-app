@@ -38,6 +38,17 @@
                               horizontal
                               :label-cols="4"
                               breakpoint="md"
+                              label="Enter Category">
+                    <b-form-select id="category" v-model="goal.category">
+                        <option v-for="category in categories"
+                                value="category._id">{{category.name}}
+                        </option>
+                    </b-form-select>
+                </b-form-group>
+                <b-form-group id="fieldsetHorizontal"
+                              horizontal
+                              :label-cols="4"
+                              breakpoint="md"
                               label="Enter Percent">
                     <b-form-input id="cost" :state="state" v-model.number="goal.percent_done">
                     </b-form-input>
@@ -66,6 +77,7 @@ export default {
   data() {
     return {
       goal: {},
+      categories: [],
     };
   },
   components: {
@@ -76,6 +88,14 @@ export default {
       .then((response) => {
         this.goal = response.data;
       })
+      .catch((e) => {
+        this.errors.push(e);
+      });
+    axios.get('http://localhost:3000/category')
+      .then((response) => {
+        this.categories = response.data;
+      },
+      )
       .catch((e) => {
         this.errors.push(e);
       });
